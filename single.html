@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bar Animation Assessment</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      .bars {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        height: 240px;
+        background-color: #111;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .bar {
+        width: 150px;
+        height: 240px;
+        background-color: #555;
+        transition: height 0.6s ease;
+      }
+
+      .bar-1 {
+        background-color: #9048aa;
+      }
+      .bar-2 {
+        background-color: #d848aa;
+      }
+      .bar-3 {
+        background-color: #fc48aa;
+      }
+      .bar-4 {
+        background-color: #fc9055;
+      }
+      .bar-5 {
+        background-color: #fcb455;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 8rem;
+        margin-top: 5rem;
+      }
+
+      button {
+        padding: 10px 30px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        color: white;
+      }
+
+      #startBtn {
+        background-color: #27ae60;
+      }
+      #resetBtn {
+        background-color: #8e44ad;
+      }
+      #stopBtn {
+        background-color: #e74c3c;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="bars">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
+        <div class="bar bar-4"></div>
+        <div class="bar bar-5"></div>
+      </div>
+      <div class="controls">
+        <button id="startBtn">Start</button>
+        <button id="resetBtn">Reset</button>
+        <button id="stopBtn">Stop</button>
+      </div>
+    </div>
+
+    <script>
+      let animation;
+      const bars = document.querySelectorAll(".bar");
+
+      document
+        .getElementById("startBtn")
+        .addEventListener("click", startAnimation);
+      document.getElementById("resetBtn").addEventListener("click", resetBars);
+      document
+        .getElementById("stopBtn")
+        .addEventListener("click", stopAnimation);
+
+      function startAnimation() {
+        stopAnimation();
+        animation = setInterval(animateBars, 700);
+      }
+
+      function resetBars() {
+        stopAnimation();
+        setBarsHeight(240);
+      }
+
+      function stopAnimation() {
+        clearInterval(animation);
+      }
+
+      function animateBars() {
+        bars.forEach((bar) => {
+          const randomHeight = Math.floor(Math.random() * 140) + 100;
+          bar.style.height = `${randomHeight}px`;
+        });
+      }
+
+      function setBarsHeight(height) {
+        bars.forEach((bar) => (bar.style.height = `${height}px`));
+      }
+    </script>
+  </body>
+</html>
